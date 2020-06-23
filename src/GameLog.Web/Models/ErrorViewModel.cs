@@ -1,5 +1,3 @@
-using System;
-
 namespace GameLog.Web.Models
 {
     public class ErrorViewModel
