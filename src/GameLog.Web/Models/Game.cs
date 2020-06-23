@@ -1,4 +1,4 @@
-﻿namespace GameLog.Domain
+﻿namespace GameLog.Web.Models
 {
     public class Game
     {

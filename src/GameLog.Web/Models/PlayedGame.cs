@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GameLog.Domain
+namespace GameLog.Web.Models
 {
     public class PlayedGame
     {

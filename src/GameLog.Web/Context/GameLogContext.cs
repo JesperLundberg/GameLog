@@ -1,8 +1,9 @@
+using GameLog.Web.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameLog.Domain.Context
+namespace GameLog.Web.Context
 {
-    public class GameLogContextc : DbContext
+    public class GameLogContext : DbContext
     {
         public DbSet<Game> Games { get; set; }
         public DbSet<PlayedGame> PlayedGames { get; set; }
