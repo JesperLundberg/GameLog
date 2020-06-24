@@ -5,12 +5,18 @@ namespace GameLog.Web.Context
 {
     public class GameLogContext : DbContext
     {
+        public GameLogContext(DbContextOptions<GameLogContext> contextOptions)
+            : base(contextOptions)
+        {
+        }
+
         public DbSet<Game> Games { get; set; }
         public DbSet<PlayedGame> PlayedGames { get; set; }
-        
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            optionsBuilder.UseSqlite("");
+            modelBuilder.Entity<Game>().ToTable("Game");
+            modelBuilder.Entity<PlayedGame>().ToTable("PlayedGame");
         }
     }
 }
