@@ -12,11 +12,11 @@ namespace GameLog.Web.Controllers
         {
             GamesRepository = gamesRepository;
         }
-        
+
         public IActionResult Index()
         {
             var viewModel = new GamesViewModel {Games = GamesRepository.GetAllGames()};
-            
+
             return View(viewModel);
         }
     }
