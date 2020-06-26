@@ -1,0 +1,18 @@
+@model GamesViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">All games</h1>
+    
+    @foreach (var game in Model.Games)
+    {
+        <div>
+            @Html.Label(game.Title)<br/>
+            @Html.Label(game.Author)<br/>
+            @Html.Label(game.Description)<br/>
+        </div>
+    }
+</div>

@@ -3,14 +3,16 @@ using System;
 using GameLog.Web.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameLog.Web.Migrations
 {
     [DbContext(typeof(GameLogContext))]
-    partial class GameLogContextModelSnapshot : ModelSnapshot
+    [Migration("20200626123733_RenamePlayedGameFK")]
+    partial class RenamePlayedGameFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

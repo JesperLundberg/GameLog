@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GameLog.Web.Context;
+using GameLog.Web.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,8 @@ namespace GameLog.Web
 
             services.AddDbContext<GameLogContext>(configuration =>
                 configuration.UseSqlite(Configuration.GetSection("ConnectionString").Value));
+
+            services.AddScoped<IGamesRepository, GamesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

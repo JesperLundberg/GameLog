@@ -6,7 +6,8 @@ namespace GameLog.Web.Models
 {
     public class PlayedGame
     {
-        [ForeignKey("Id")]
+        public int Id { get; set; }
+        [ForeignKey("GameId")]
         public Game Game { get; set; }
         public DateTime DateFinished { get; set; }
         public bool Finished { get; set; }

@@ -7,7 +7,7 @@ namespace GameLog.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ILogger<HomeController> Logger { get; set; }
+        private ILogger<HomeController> Logger { get; }
 
         public HomeController(ILogger<HomeController> logger)
         {
