@@ -10,9 +10,7 @@
     @foreach (var game in Model.Games)
     {
         <div>
-            @Html.Label(game.Title)<br/>
-            @Html.Label(game.Author)<br/>
-            @Html.Label(game.Description)<br/>
+            <a asp-controller="SpecificGame" asp-action="Index" asp-route-id="@game.GameId">@Html.Label(game.Title)</a><br/>
         </div>
     }
 </div>
