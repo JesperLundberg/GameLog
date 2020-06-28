@@ -21,6 +21,7 @@ namespace GameLog.Web.Repositories
 
         public bool AddGame(Game game)
         {
+            // TODO: Nullcheck!
             GameLogContext.Add(game);
 
             return 0.Equals(GameLogContext.SaveChanges());
