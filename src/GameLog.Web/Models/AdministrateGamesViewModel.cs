@@ -7,5 +7,6 @@ namespace GameLog.Web.Models
         public IEnumerable<Game> Games { get; set; }
 
         public Game GameToAdd { get; set; }
+        public GenericMessage PostMessage { get; set; }
     }
 }

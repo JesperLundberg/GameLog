@@ -13,12 +13,13 @@ namespace GameLog.Web.Controllers
             GamesRepository = gamesRepository;
         }
         
-        public IActionResult Index()
+        public IActionResult Index(GenericMessage genericMessage = null)
         {
             var viewModel = new AdministrateGamesViewModel
             {
                 Games = GamesRepository.GetAllGames(),
-                GameToAdd = new Game()
+                GameToAdd = new Game(),
+                PostMessage = genericMessage
             };
             
             return View(viewModel);
@@ -26,9 +27,9 @@ namespace GameLog.Web.Controllers
 
         public RedirectToActionResult AddGames(AdministrateGamesViewModel gamesViewModel)
         {
-            GamesRepository.AddGame(gamesViewModel.GameToAdd);
+            var message = GamesRepository.AddGame(gamesViewModel.GameToAdd);
             
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", message);
         }
     }
 }

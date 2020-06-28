@@ -23,6 +23,22 @@
         <input type="submit" value="Add Game" class="btn btn-sm btn-success text-uppercase rounded-0"/>
     </form>
 
+    @if (Model.PostMessage != null)
+    {
+        @if (Model.PostMessage.Success)
+        {
+            <div>
+                <span class="text-success">Successfully saved game in database</span>
+            </div>
+        }
+        else
+        {
+            <div>
+                <span class="text-danger">@Model.PostMessage.Message</span>
+            </div>
+        }
+    }
+
     <h1 class="display-4">All games</h1>
 
     @foreach (var game in Model.Games)
