@@ -13,57 +13,48 @@ namespace GameLog.Web.Controllers
             GamesRepository = gamesRepository;
         }
 
-        public IActionResult Index(GenericResponse result = null)
+        public IActionResult Index()
         {
             var viewModel = new AdministrateGamesViewModel
             {
                 Games = GamesRepository.GetAllGames(),
-                GameToAdd = new Game(),
-                Result = result
+                GameToAdd = new Game()
             };
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public RedirectToActionResult AddGames(AdministrateGamesViewModel gamesViewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Index",
-                    new GenericResponse {Success = false, Message = "Fill in values correctly (from AddGames)"});
-            }
-
-            var result = GamesRepository.AddGame(gamesViewModel.GameToAdd);
-
-            return RedirectToAction("Index", result);
-        }
-
-        [HttpPost]
         public JsonResult AddGamesAjax(string title, string author, string description)
         {
-            var result = new GenericResponse();
-            
+            var result = new GenericResult {Success = true};
+
             if (string.IsNullOrEmpty(title))
             {
                 result.Success = false;
-                result.Message = "Fix title!";
-                return Json(result);
+                result.Message = "Fix title!|";
             }
 
             if (string.IsNullOrEmpty(author))
             {
                 result.Success = false;
-                result.Message += "Fix author!";
+                result.Message += "Fix author!|";
             }
 
-            if (string.IsNullOrEmpty(author))
+            if (string.IsNullOrEmpty(description))
             {
                 result.Success = false;
-                result.Message += "Fix author!";
+                result.Message += "Fix description!|";
+            }
+
+            if (result.Success)
+            {
+                var gameToAdd = new Game{Title = title, Author = author, Description = description};
+                GamesRepository.AddGame(gameToAdd);
+                result.Message = "Game added successfully!";
             }
             
-            return Json(new GenericResponse{Success = true, Message = "Success!"});
+            return Json(result);
         }
     }
 }

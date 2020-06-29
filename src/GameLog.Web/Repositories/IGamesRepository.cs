@@ -6,7 +6,7 @@ namespace GameLog.Web.Repositories
     public interface IGamesRepository
     {
         IEnumerable<Game> GetAllGames();
-        GenericResponse AddGame(Game game);
+        GenericResult AddGame(Game game);
         Game GetGame(int id);
     }
 }
