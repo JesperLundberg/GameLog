@@ -8,7 +8,7 @@
     <h1 class="display-4">Add game</h1>
     <form asp-action="AddGames">
         <label asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title"></label>
-        <input asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title" placeholder="@Model.GameToAdd.Title"/>
+        <input class="" asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title" placeholder="@Model.GameToAdd.Title"/>
         <br/>
 
         <label asp-for="GameToAdd.Author" value="@Model.GameToAdd.Author"></label>
@@ -20,7 +20,9 @@
                class="text-body"/>
         <br/>
 
-        <input type="submit" value="Add Game" class="btn btn-sm btn-success text-uppercase rounded-0"/>
+        <input type="button" value="Add Game" class="btn btn-default" onclick="addGame();" />
+        
+        @* <input type="submit" value="Add Game" class="btn btn-sm btn-success text-uppercase rounded-0"/> *@
     </form>
 
     @if (Model.Result != null)
@@ -48,3 +50,28 @@
         </div>
     }
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+       
+    function addGame() {
+        var title = document.getElementById("GameToAdd_Title").value;
+        var author = document.getElementById("GameToAdd_Author").value;
+        var description = document.getElementById("GameToAdd_Description").value;
+                
+        console.log(title);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddGamesAjax")/?title=' + title + '&author=' + author + '&description=' + description,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        error: function (xhr, status, errorThrown) {
+            var err = "Status: " + status + " " + errorThrown;
+            console.log(err);
+        }
+        }).done(function (data) {
+            console.log(data.message);
+        })
+    }
+</script>
+}

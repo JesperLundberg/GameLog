@@ -13,7 +13,7 @@ namespace GameLog.Web.Controllers
             GamesRepository = gamesRepository;
         }
 
-        public IActionResult Index(GenericMessage result = null)
+        public IActionResult Index(GenericResponse result = null)
         {
             var viewModel = new AdministrateGamesViewModel
             {
@@ -31,12 +31,39 @@ namespace GameLog.Web.Controllers
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Index",
-                    new GenericMessage {Success = false, Message = "Fill in values correctly (from AddGames)"});
+                    new GenericResponse {Success = false, Message = "Fill in values correctly (from AddGames)"});
             }
 
             var result = GamesRepository.AddGame(gamesViewModel.GameToAdd);
 
             return RedirectToAction("Index", result);
+        }
+
+        [HttpPost]
+        public JsonResult AddGamesAjax(string title, string author, string description)
+        {
+            var result = new GenericResponse();
+            
+            if (string.IsNullOrEmpty(title))
+            {
+                result.Success = false;
+                result.Message = "Fix title!";
+                return Json(result);
+            }
+
+            if (string.IsNullOrEmpty(author))
+            {
+                result.Success = false;
+                result.Message += "Fix author!";
+            }
+
+            if (string.IsNullOrEmpty(author))
+            {
+                result.Success = false;
+                result.Message += "Fix author!";
+            }
+            
+            return Json(new GenericResponse{Success = true, Message = "Success!"});
         }
     }
 }

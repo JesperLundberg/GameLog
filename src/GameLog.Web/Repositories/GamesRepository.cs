@@ -19,26 +19,26 @@ namespace GameLog.Web.Repositories
             return GameLogContext.Games;
         }
 
-        public GenericMessage AddGame(Game game)
+        public GenericResponse AddGame(Game game)
         {
             if (game == null || string.IsNullOrEmpty(game.Title) || string.IsNullOrEmpty(game.Author) ||
                 string.IsNullOrEmpty(game.Description))
             {
-                return new GenericMessage {Success = false, Message = "Must fill in all game data."};
+                return new GenericResponse {Success = false, Message = "Must fill in all game data."};
             }
 
             GameLogContext.Add(game);
             // saveResult is the number of written state entries
             var saveResult = GameLogContext.SaveChanges();
             
-            var returnMessage = new GenericMessage{Success = saveResult > 0};
+            var returnMessage = new GenericResponse{Success = saveResult > 0};
 
             if (saveResult != 0)
             {
                 returnMessage.Message = "Failed to save to database.";
             }
             
-            return new GenericMessage{};
+            return new GenericResponse{};
         }
 
         public Game GetGame(int id)
