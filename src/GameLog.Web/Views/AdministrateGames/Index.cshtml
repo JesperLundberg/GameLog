@@ -23,9 +23,9 @@
         <input type="submit" value="Add Game" class="btn btn-sm btn-success text-uppercase rounded-0"/>
     </form>
 
-    @if (Model.PostMessage != null)
+    @if (Model.Result != null)
     {
-        @if (Model.PostMessage.Success)
+        @if (Model.Result.Success)
         {
             <div>
                 <span class="text-success">Successfully saved game in database</span>
@@ -34,7 +34,7 @@
         else
         {
             <div>
-                <span class="text-danger">@Model.PostMessage.Message</span>
+                <span class="text-danger">@Model.Result.Message</span>
             </div>
         }
     }

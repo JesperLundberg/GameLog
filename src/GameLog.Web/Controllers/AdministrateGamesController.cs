@@ -12,24 +12,31 @@ namespace GameLog.Web.Controllers
         {
             GamesRepository = gamesRepository;
         }
-        
-        public IActionResult Index(GenericMessage genericMessage = null)
+
+        public IActionResult Index(GenericMessage result = null)
         {
             var viewModel = new AdministrateGamesViewModel
             {
                 Games = GamesRepository.GetAllGames(),
                 GameToAdd = new Game(),
-                PostMessage = genericMessage
+                Result = result
             };
-            
+
             return View(viewModel);
         }
 
+        [HttpPost]
         public RedirectToActionResult AddGames(AdministrateGamesViewModel gamesViewModel)
         {
-            var message = GamesRepository.AddGame(gamesViewModel.GameToAdd);
-            
-            return RedirectToAction("Index", message);
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index",
+                    new GenericMessage {Success = false, Message = "Fill in values correctly (from AddGames)"});
+            }
+
+            var result = GamesRepository.AddGame(gamesViewModel.GameToAdd);
+
+            return RedirectToAction("Index", result);
         }
     }
 }
