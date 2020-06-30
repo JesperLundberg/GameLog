@@ -6,9 +6,9 @@
 
 <div class="text-center">
     <h1 class="display-4">Add game</h1>
-    <form asp-action="AddGames">
+    <form>
         <label asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title"></label>
-        <input class="" asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title" placeholder="@Model.GameToAdd.Title"/>
+        <input class="bg-danger" asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title" placeholder="@Model.GameToAdd.Title"/>
         <br/>
 
         <label asp-for="GameToAdd.Author" value="@Model.GameToAdd.Author"></label>
@@ -16,8 +16,8 @@
         <br/>
 
         <label asp-for="GameToAdd.Description" value="@Model.GameToAdd.Description"></label>
-        <input asp-for="GameToAdd.Description" value="@Model.GameToAdd.Description" placeholder="@Model.GameToAdd.Description"
-               class="text-body"/>
+        <textarea asp-for="GameToAdd.Description" value="@Model.GameToAdd.Description" placeholder="@Model.GameToAdd.Description"
+               class="text-body"></textarea>
         <br/>
 
         <input type="button" value="Add Game" class="btn btn-default" onclick="addGame();" />
