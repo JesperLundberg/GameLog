@@ -38,7 +38,7 @@ namespace GameLog.Web.Repositories
                 returnMessage.Message = "Failed to save to database.";
             }
             
-            return new GenericResult{};
+            return returnMessage;
         }
 
         public Game GetGame(int id)
