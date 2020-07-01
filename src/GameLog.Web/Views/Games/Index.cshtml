@@ -6,11 +6,12 @@
 
 <div class="text-center">
     <h1 class="display-4">All games</h1>
-    
-    @foreach (var game in Model.Games)
-    {
-        <div>
-            <a asp-controller="SpecificGame" asp-action="Index" asp-route-id="@game.GameId">@Html.Label(game.Title)</a><br/>
-        </div>
-    }
+
+    <div>
+        @foreach (var game in Model.Games)
+        {
+            <a asp-controller="SpecificGame" asp-action="Index" asp-route-id="@game.GameId">@Html.Label(game.Title)</a>
+            <br/>
+        }
+    </div>
 </div>
