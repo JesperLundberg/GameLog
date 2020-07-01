@@ -5,12 +5,11 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">All games</h1>
-    
-        <div>
-            @Html.Label(Model.Title)
-            @Html.Label(Model.Author)
-            @Html.Label(Model.Description)
-        </div>
-    
+    <h1 class="display-4">Game info</h1>
+
+    <div class="">
+        Title: @Html.Label(Model.Title)<br/>
+        Author: @Html.Label(Model.Author)<br/>
+        Description: @Html.Label(Model.Description)
+    </div>
 </div>

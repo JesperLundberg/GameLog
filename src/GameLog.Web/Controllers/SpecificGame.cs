@@ -12,7 +12,6 @@ namespace GameLog.Web.Controllers
             GamesRepository = gamesRepository;
         }
         
-        // GET
         public IActionResult Index(int id)
         {
             var game = GamesRepository.GetGame(id);
