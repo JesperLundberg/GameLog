@@ -596,3 +596,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,csharp,aspnetcore,rider
+
+# GameLog specific
+src/GameLog.Web/wwwroot/css/site.min.css
+src/GameLog.Web/wwwroot/js/site.min.js

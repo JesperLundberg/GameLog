@@ -8,7 +8,7 @@
     <h1 class="display-4">Add game</h1>
     <form>
         <label asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title"></label>
-        <input class="bg-danger" asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title" placeholder="@Model.GameToAdd.Title"/>
+        <input asp-for="GameToAdd.Title" value="@Model.GameToAdd.Title" placeholder="@Model.GameToAdd.Title"/>
         <br/>
 
         <label asp-for="GameToAdd.Author" value="@Model.GameToAdd.Author"></label>
@@ -20,19 +20,67 @@
                class="text-body"></textarea>
         <br/>
 
-        <input type="button" value="Add Game" class="btn btn-default" onclick="addGame();" />
+        <input type="button" value="Add Game" class="btn btn-default" onclick="administrateGames_addGame()"/>
     </form>
 
     <div>
         <span id="saveResultMessage" style="display: none"></span>
     </div>
-    
+
     <h1 class="display-4">All games</h1>
 
     @foreach (var game in Model.Games)
     {
-        <div>
+        <div id="gameList">
             @Html.Label(game.Title)<br/>
         </div>
     }
 </div>
+
+@* @section Scripts *@
+@* { *@
+@*     <script type="text/javascript"> *@
+@*         function addGame() { *@
+@*         // Get the form values *@
+@*         var title = document.getElementById("GameToAdd_Title").value; *@
+@*         var author = document.getElementById("GameToAdd_Author").value; *@
+@*         var description = document.getElementById("GameToAdd_Description").value; *@
+@* *@
+@*         $.ajax({ *@
+@*             type: "POST", *@
+@*             url: '@Url.Action("AddGamesAjax")/?title=' + title + '&author=' + author + '&description=' + description, *@
+@*             contentType: "application/json; charset=utf-8", *@
+@*             dataType: "json", *@
+@*             error: function (xhr, status, errorThrown) { *@
+@*                 var err = "Status: " + status + " " + errorThrown; *@
+@*                 console.log(err); *@
+@*             } *@
+@*             }).done(function (data) { *@
+@*                 // Present the response *@
+@*                 var saveResultMessage = document.getElementById("saveResultMessage"); *@
+@*                 saveResultMessage.innerHTML = data.message.replaceAll('|', '<br/>'); *@
+@*                 saveResultMessage.style.display = "block"; *@
+@* *@
+@*                 setSuccessFailColor(data.success) *@
+@*             }) *@
+@*         } *@
+@* *@
+@*         function setSuccessFailColor(success) { *@
+@*         if (success) { *@
+@*             // On successful call - set green color *@
+@*             saveResultMessage.classList.add("text-success"); *@
+@*             saveResultMessage.classList.remove("text-danger"); *@
+@* *@
+@*             // And reload page after 2 seconds to get new title to appear *@
+@*             // TODO: Insert it via JS instead and don't reload? *@
+@*             setTimeout(() => { *@
+@*                 location.reload(); *@
+@*             }, 2000); *@
+@*         } else { *@
+@*             // On failed, set the text red *@
+@*             saveResultMessage.classList.remove("text-success"); *@
+@*             saveResultMessage.classList.add("text-danger"); *@
+@*         } *@
+@*     } *@
+@*     </script> *@
+@* } *@
