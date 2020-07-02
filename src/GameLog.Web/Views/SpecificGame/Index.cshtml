@@ -7,10 +7,15 @@
 <div class="text-center">
     <h1 class="display-4">Game info</h1>
 
-    <div class="">
-        Title: @Html.Label(Model.Title)<br/>
-        Author: @Html.Label(Model.Author)<br/>
-        Description: @Html.Label(Model.Description)<br/>
-        Date added: @Html.Label(Model.GameAddedDate.ToString("yyyy-MM-dd"))
+    <div class="card">
+        <form asp-action="EditGame">
+            @Html.HiddenFor(m => m.GameId)
+            Title: @Html.TextBoxFor(m => m.Title)<br/>
+            Author: @Html.TextBoxFor(m => m.Author)<br/>
+            Description: @Html.TextBoxFor(m => m.Description)<br/>
+            Date added: @Html.TextBoxFor(m => m.GameAddedDate)
+
+            <input type="submit" value="Edit"/>
+        </form>
     </div>
 </div>

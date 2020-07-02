@@ -19,12 +19,32 @@ namespace GameLog.Web.Repositories
             return GameLogContext.Games;
         }
 
+        public GenericResult EditGame(Game game)
+        {
+            if (!IsDataValid(game))
+            {
+                return new GenericResult {Success = false, Message = "Fix input!"};
+            }
+
+            GameLogContext.Update(game);
+            // saveResult is the number of written state entries
+            var saveResult = GameLogContext.SaveChanges();
+            
+            var returnMessage = new GenericResult{Success = saveResult > 0};
+
+            if (saveResult == 0)
+            {
+                returnMessage.Message = "Failed to save to database.";
+            }
+            
+            return returnMessage;
+        }
+        
         public GenericResult AddGame(Game game)
         {
-            if (game == null || string.IsNullOrEmpty(game.Title) || string.IsNullOrEmpty(game.Author) ||
-                string.IsNullOrEmpty(game.Description))
+            if (!IsDataValid(game))
             {
-                return new GenericResult {Success = false, Message = "Must fill in all game data."};
+                return new GenericResult {Success = false, Message = "Fix input!"};
             }
 
             GameLogContext.Add(game);
@@ -33,7 +53,7 @@ namespace GameLog.Web.Repositories
             
             var returnMessage = new GenericResult{Success = saveResult > 0};
 
-            if (saveResult != 0)
+            if (saveResult == 0)
             {
                 returnMessage.Message = "Failed to save to database.";
             }
@@ -44,6 +64,17 @@ namespace GameLog.Web.Repositories
         public Game GetGame(int id)
         {
             return GameLogContext.Games.First(x => x.GameId == id);
+        }
+        
+        private bool IsDataValid(Game game)
+        {
+            if (game == null || string.IsNullOrEmpty(game.Title) || string.IsNullOrEmpty(game.Author) ||
+                string.IsNullOrEmpty(game.Description) || game.GameAddedDate == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
