@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using GameLog.Web.Enum;
 
 namespace GameLog.Web.Models
 {
@@ -12,6 +11,7 @@ namespace GameLog.Web.Models
         public DateTime DateFinished { get; set; }
         public bool Finished { get; set; }
         public bool Replayed { get; set; }
-        public Rating Rating { get; set; }
+        public int Rating { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 }
