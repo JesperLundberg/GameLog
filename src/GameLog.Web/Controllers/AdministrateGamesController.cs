@@ -1,4 +1,5 @@
-﻿using GameLog.Web.Models;
+﻿using System;
+using GameLog.Web.Models;
 using GameLog.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,11 +50,12 @@ namespace GameLog.Web.Controllers
 
             if (result.Success)
             {
-                var gameToAdd = new Game{Title = title, Author = author, Description = description};
+                var gameToAdd = new Game
+                    {Title = title, Author = author, Description = description, GameAddedDate = DateTime.Now};
                 GamesRepository.AddGame(gameToAdd);
                 result.Message = "Game added successfully!";
             }
-            
+
             return Json(result);
         }
     }
