@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameLog.Web.Context;
@@ -17,6 +18,11 @@ namespace GameLog.Web.Repositories
         public IEnumerable<Game> GetAllGames()
         {
             return GameLogContext.Games;
+        }
+
+        public IEnumerable<PlayedGame> GetAllPlayedGames()
+        {
+            return GameLogContext.PlayedGames;
         }
 
         public GenericResult EditGame(Game game)
@@ -39,7 +45,12 @@ namespace GameLog.Web.Repositories
             
             return returnMessage;
         }
-        
+
+        public GenericResult EditPlayedGame(PlayedGame playedGame)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public GenericResult AddGame(Game game)
         {
             if (!IsDataValid(game))
@@ -61,15 +72,35 @@ namespace GameLog.Web.Repositories
             return returnMessage;
         }
 
+        public GenericResult AddPlayedGame(PlayedGame playedGame)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Game GetGame(int id)
         {
             return GameLogContext.Games.First(x => x.GameId == id);
         }
-        
-        private bool IsDataValid(Game game)
+
+        public PlayedGame GetPlayedGame(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private static bool IsDataValid(Game game)
         {
             if (game == null || string.IsNullOrEmpty(game.Title) || string.IsNullOrEmpty(game.Author) ||
-                string.IsNullOrEmpty(game.Description) || game.GameAddedDate == null)
+                string.IsNullOrEmpty(game.Description) || game.GameAddedDate == default)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        
+        private static bool IsDataValid(PlayedGame playedGame)
+        {
+            if (playedGame == null)
             {
                 return false;
             }
